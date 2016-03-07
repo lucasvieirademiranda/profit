@@ -1,0 +1,22 @@
+{
+  "name": "Profit",
+  "version": "1.0.0",
+  "description": "It's a finance management system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://LVMiranda@bitbucket.org/LVMiranda/profit.git"
+  },
+  "author": "Lucas Vieira de Miranda",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.5.2",
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "express-validator": "^2.19.0",
+    "mongodb": "^2.1.4"
+  }
+}
