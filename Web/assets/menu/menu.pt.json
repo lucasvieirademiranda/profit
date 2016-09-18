@@ -1,0 +1,33 @@
+[
+    {
+        "text": "Cadastros",
+        "url": null,
+        "items": [
+            {
+                "text": "Categorias de Entrada",
+                "url": null,
+                "items": null
+            },
+            {
+                "text": "Categorias de Saída",
+                "url": null,
+                "items": null
+            },
+            {
+                "text": "Bancos",
+                "url": null,
+                "items": null
+            },
+            {
+                "text": "Contas",
+                "url": null,
+                "items": null
+            }
+        ] 
+    },
+    {
+        "text": "Análise",
+        "url": null,
+        "items": null
+    }
+]

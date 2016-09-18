@@ -1,18 +1,38 @@
-<div class="col col-sm-3 col-md-4 hidden-xs profit-min-height-100"></div>
-<div class="col col-xs-12 col-sm-6 col-md-4 profit-min-height-100" style="display: table;">
-    <div style="display: table-cell;vertical-align: middle;">
-        <div class="row">
-            
-        </div>
-        <div class="row">
-            
-        </div>
-        <div class="row">
-            
-        </div>
-        <div class="row">
-            
-        </div>
+<div class="col-xs-1 col-sm-3 col-md-4 profit-min-height-100"></div>
+<div class="col col-xs-10 col-sm-6 col-md-4 profit-min-height-100" style="display: table;">
+    <div ng-controller="LoginController" style="display: table-cell;vertical-align: middle;">
+        <form name="loginCadastre">
+            <div class="logo-content"></div>
+            <div class="form-content">
+                <div class="row">
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input id="email" ng-model="user.email" required ng-email type="text" name="email" class="form-control">
+                        <div ng-show="loginCadastre.email.$touched">
+                            <div ng-messages="loginCadastre.email.$error" role="alert">
+                                <div ng-message="required">Você deve informar seu e-mail.</div>
+                                <div ng-message="email">Você deve informar um e-mail válido.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="password">Senha:</label>
+                        <input id="password" ng-model="user.password" required type="password" name="password" class="form-control">
+                        <div ng-show="loginCadastre.password.$touched">
+                            <div ng-messages="loginCadastre.password.$error" role="alert">
+                                <div ng-message="required">Você deve informar sua senha.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <button ng-click="login()" type="button" class="btn btn-md btn-primary">Entrar</button>
+                    <button ng-click="clear()" type="button" class="btn btn-md btn-default">Limpar</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
-<div class="col col-sm-3 col-md-4 hidden-xs profit-min-height-100"></div>
+<div class="col-xs-1 col-sm-3 col-md-4 profit-min-height-100"></div>

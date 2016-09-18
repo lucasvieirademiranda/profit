@@ -1,0 +1,73 @@
+<div class="col col-xs-1 col-sm-3 col-md-4 profit-min-height-100"></div>
+<div class="col col-xs-10 col-sm-6 col-md-4 profit-min-height-100" style="display: table;">
+    <div ng-controller="CadastreController" style="display: table-cell;vertical-align: middle;">
+        <form name="userCadastre">
+            <div class="row text-center">
+                <h2>Cadastro de Usuário</h2>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="user">Nome:</label>
+                    <input id="user" ng-model="user.name" required type="text" name="name" class="form-control">
+                    <div ng-show="userCadastre.name.$touched">
+                        <div ng-messages="userCadastre.name.$error" role="alert">
+                            <div ng-message="required">Você deve informar seu nome.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="user">E-mail:</label>
+                    <input id="user" ng-model="user.email" required ng-email type="text" name="email" class="form-control">
+                    <div ng-show="userCadastre.email.$touched">
+                        <div ng-messages="userCadastre.email.$error" role="alert">
+                            <div ng-message="required">Você deve informar seu e-mail.</div>
+                            <div ng-message="email">Você deve informar um e-mail válido.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="user">Data de Nascimento:</label>
+                    <input id="user" ng-model="user.birthday" ui-mask="99/99/9999" required ng-pattern="/\d{2}/\d{2}/\d{4}/" type="text" name="birthday" class="form-control">
+                    <div ng-show="userCadastre.birthday.$touched">
+                        <div ng-messages="userCadastre.birthday.$error" role="alert">
+                            <div ng-message="required">Você deve informar sua data de nascimento.</div>
+                            <div ng-message="pattern">Você deve informar uma data válida.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="user">Senha:</label>
+                    <input id="password" ng-model="user.password" required type="password" name="password" class="form-control">
+                    <div ng-show="userCadastre.password.$touched">
+                        <div ng-messages="userCadastre.password.$error" role="alert">
+                            <div ng-message="required">Você deve informar sua senha.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="user">Confirmar Senha:</label>
+                    <input id="user" ng-model="user.confirmPassword" required ng-match="password" type="password" name="confirmPassword" class="form-control">
+                    <div ng-show="userCadastre.confirmPassword.$touched">
+                        <div ng-messages="userCadastre.confirmPassword.$error" role="alert">
+                            <div ng-message="required">Você deve confirmar sua senha.</div>
+                            <div ng-message="match">A confirmação não corresponde com a senha.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button ng-click="back()" type="button" class="pull-left btn btn-md btn-default">Voltar</button>
+                <button ng-click="cadastre()" type="button" class="pull-right btn btn-md btn-primary">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="col col-xs-1 col-sm-3 col-md-4 profit-min-height-100"></div>
