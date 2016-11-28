@@ -1,32 +1,52 @@
-var loader = require('./application/loader');
-var process = require('process');
-var mongodb = require('mongodb').MongoClient;
-var objectId = require('mongodb').ObjectId;
-var express = require("express");
-var bodyParser = require('body-parser');
-var expressValidator = require('express-validator');
-var application = express();
+var cluster = require("cluster");
+var os = require("os");
 
-mongodb.connect('mongodb://localhost:27017/profit', function (error, database) {
+if(cluster.isMaster)
+{
+    var numberOfWorkers = os.cpus().length;
 
-    if (error) throw error;
+    for(var i = 0; i < numberOfWorkers; i++)
+        cluster.fork();
 
-    global.database = database;
-    global.objectId = objectId;
+    cluster.on("online", function(worker) {
+        console.log('A worker with pid:' + worker.process.pid + ' has been started');
+    });
 
-    application.use(bodyParser.json());
-    application.use(bodyParser.urlencoded({ extended: true }));
-    application.use(expressValidator([]));
+    cluster.on("exit", function(worker, code, signal) {
+        console.log('A worker with pid: ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
+        console.log('Starting a new worker...');
+        cluster.fork();
+    });
 
-    loader.start(application);
+}
+else
+{
+    var loader = require('./application/loader');
+    var process = require('process');
+    var mongodb = require('mongodb').MongoClient;
+    var objectId = require('mongodb').ObjectId;
+    var bodyParser = require('body-parser');
+    var expressValidator = require('express-validator');
+    var http = require("http");
+    var express = require("express");
+    var application = express();
 
-    var server = application.listen(process.env.PORT || 3000, function () {
+    mongodb.connect('mongodb://localhost:27017/profit', function (error, database) {
 
-        var host = server.address().address;
-        var port = server.address().port;
+        if (error) throw error;
 
-        console.log("Profit is up on " + host + ":" + port);
+        global.database = database;
+        global.objectId = objectId;
+
+        application.use(bodyParser.json());
+        application.use(bodyParser.urlencoded({ extended: true }));
+        application.use(expressValidator([]));
+
+        loader.start(application);
+
+        http.createServer(application)
+            .listen(3000, "localhost");
 
     });
 
-});
+}

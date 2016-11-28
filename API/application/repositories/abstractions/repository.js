@@ -19,8 +19,8 @@ exports.find = function (criteria, done) {
         if (error)
         {
             done({
-                codigo: 500,
-                mensagem: "Não foi possível acessar a base de dados!!"
+                code: 500,
+                message: "Não foi possível acessar a base de dados!!"
             }, null);
             
             return;
@@ -43,8 +43,8 @@ exports.create = function (document, done) {
         if (error)
         {
             done({
-                codigo: 500,
-                mensagem: "Não foi possível acessar a base de dados!!"
+                code: 500,
+                message: "Não foi possível acessar a base de dados!!"
             }, null);
             
             return;
@@ -56,17 +56,43 @@ exports.create = function (document, done) {
 
 };
 
+exports.pagedList = function(criteria, projection, skip, take, done) {
+
+    var collection = _database.collection(_collectionName);
+
+    collection.find(criteria)
+              .project(projection)
+              .skip(skip)
+              .limit(take)
+              .toArray(function(error, documents) {
+
+                  if(error)
+                  {
+                      done({
+                        code: 500,
+                        message: "Não foi possível acessar a base de dados!!"
+                      });
+
+                      return;
+                  }
+
+                  done(null, documents);
+
+              });
+
+};
+
 exports.list = function (criteria, projection, done) {
 
     var collection = _database.collection(_collectionName);
 
-    collection.find(criteria, projection, function (error, documents) {
+    collection.find(criteria).project(projection).toArray(function (error, documents) {
 
         if (error)
         {
             done({
-                codigo: 500,
-                mensagem: "Não foi possível acessar a base de dados!!"
+                code: 500,
+                message: "Não foi possível acessar a base de dados!!"
             }, null);
             
             return;
@@ -87,8 +113,8 @@ exports.update = function (criteria, document, done) {
         if (error)
         {
             done({
-                codigo: 500,
-                mensagem: "Não foi possível acessar a base de dados!!"
+                code: 500,
+                message: "Não foi possível acessar a base de dados!!"
             }, null);
             
             return;
@@ -109,8 +135,8 @@ exports.delete = function (criteria, done) {
         if (error)
         {
             done({
-                codigo: 500,
-                mensagem: "Não foi possível acessar a base de dados!!"
+                code: 500,
+                message: "Não foi possível acessar a base de dados!!"
             }, null);
             
             return;

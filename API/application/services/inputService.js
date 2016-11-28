@@ -7,7 +7,8 @@ exports.find = function(criteria, done) {
     
 };
 
-exports.list = function() {
+exports.list = function(criteria, done) {
+    
     
 };
 

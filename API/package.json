@@ -13,10 +13,11 @@
   "author": "Lucas Vieira de Miranda",
   "license": "MIT",
   "dependencies": {
-    "async": "^1.5.2",
-    "body-parser": "^1.14.2",
-    "express": "^4.13.3",
-    "express-validator": "^2.19.0",
-    "mongodb": "^2.1.4"
+    "async": "^2.1.2",
+    "body-parser": "*",
+    "cluster": "*",
+    "express": "*",
+    "express-validator": "*",
+    "mongodb": "*"
   }
 }

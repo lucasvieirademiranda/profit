@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+
 var userService = require('../services/userService.js');
 
 router.get('/find/:id', function (request, response) {
@@ -10,7 +11,7 @@ router.get('/find/:id', function (request, response) {
 
         if (error)
         {
-            response.status(error.codigo)
+            response.status(error.code)
                     .send(error);
             
             return;
@@ -23,9 +24,28 @@ router.get('/find/:id', function (request, response) {
 
 });
 
-/*router.get('/list', function (request, response) {
+router.get('/list', function (request, response) {
 
-});*/
+    var criteria = {};
+
+    var projection = {};
+
+    userService.list(criteria, projection, function(error, data) {
+        
+        if (error) 
+        {
+            response.status(error.code)
+                    .send(error);
+            
+            return;
+        }
+
+        response.status(200)
+            .send(data);
+
+    });
+
+});
 
 router.post('/create', function (request, response) {
 
@@ -40,7 +60,7 @@ router.post('/create', function (request, response) {
         
         if (error) 
         {
-            response.status(error.codigo)
+            response.status(error.code)
                     .send(error);
             
             return;
@@ -69,7 +89,7 @@ router.patch('/update/:id', function (request, response) {
        
        if(error)
        {
-           response.status(error.codigo)
+           response.status(error.code)
                    .send(error);
            
            return;
@@ -90,7 +110,7 @@ router.delete('/delete/:id', function (request, response) {
         
         if (error)
         {            
-            response.status(error.codigo)
+            response.status(error.code)
                 .send(error);
                 
             return;    
